@@ -1,8 +1,15 @@
 from rest_framework import serializers
-from .models import Paciente
+from .models import Vehiculo, RegistroAcceso
 
-class PacienteSerializer(serializers.ModelSerializer):
+class VehiculoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Paciente
-        fields = '__all__' # Expone todos los campos
-        read_only_fields = ('fecha_registro',) # Protege la fecha para que no sea modificada
+        model = Vehiculo
+        fields = '__all__'
+
+class RegistroAccesoSerializer(serializers.ModelSerializer):
+    # Esto mostrará la placa en lugar de solo el ID del vehículo al consultar registros
+    placa_vehiculo = serializers.ReadOnlyField(source='vehiculo.placa')
+
+    class Meta:
+        model = RegistroAcceso
+        fields = '__all__'
