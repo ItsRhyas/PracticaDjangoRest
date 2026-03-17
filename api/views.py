@@ -1,10 +1,11 @@
-from django.shortcuts import render
-
 from rest_framework import viewsets
-from .models import Paciente
-from .serializers import PacienteSerializer
+from .models import Vehiculo, RegistroAcceso
+from .serializers import VehiculoSerializer, RegistroAccesoSerializer
 
+class VehiculoViewSet(viewsets.ModelViewSet):
+    queryset = Vehiculo.objects.all()
+    serializer_class = VehiculoSerializer
 
-class PacienteViewSet(viewsets.ModelViewSet):
-    queryset = Paciente.objects.all()
-    serializer_class = PacienteSerializer
+class RegistroAccesoViewSet(viewsets.ModelViewSet):
+    queryset = RegistroAcceso.objects.all()
+    serializer_class = RegistroAccesoSerializer
